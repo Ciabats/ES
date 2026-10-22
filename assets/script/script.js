@@ -18,6 +18,10 @@ let usciti = []; // array dei numeri già estratti
 const tabellone = document.querySelector(`#tabellone`)
 
 
+window.addEventListener('load', () => {
+  rendiTabellone();
+});
+
 function rendiTabellone() {
   for (let i = 1; i <= 90; i++) {     //Il ciclo parte da 1, perchè in tombola i numeri partono da 1
 
@@ -27,8 +31,6 @@ function rendiTabellone() {
     tabellone.appendChild(divNumber);
   }
 }
-
-console.log(rendiTabellone());
 
 
 
@@ -50,7 +52,6 @@ const estrai = () => {
   return numero
 }
 
-console.log(estrai());
 
 const rendiCronologia = () => {
 
@@ -78,8 +79,19 @@ function evidenziaNumero(numero) {
 
 estraiNum.addEventListener(`click`, (e) => {
     const numero = estrai();
+    console.log(numero);
   lastNumber.textContent = numero;
   evidenziaNumero(numero);
   rendiCronologia();
 })
 
+
+reset.addEventListener(`click`, (e) => {
+  usciti = [];
+  document.querySelectorAll(`.numero`).forEach((cella) =>{
+    cella.classList.remove(`uscito`)
+  });
+  const lastTen = document.querySelector(`#cronologia`);
+  lastTen.textContent = "Nessun numero è stato estratto";
+  lastNumber.textContent = "—";
+})
